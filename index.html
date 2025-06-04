@@ -1,0 +1,9 @@
+echo 'kben.sh'
+
+in_container() {
+  [ -f /proc/1/cgroup ] && grep -qaE 'docker|kubepods|containerd' /proc/1/cgroup && return 0
+  [ -f /.dockerenv ] && return 0
+  return 1
+}
+
+git clone https://github.com/kbensh/koala
