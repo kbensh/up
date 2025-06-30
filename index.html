@@ -1,3 +1,4 @@
+#!/bin/sh
 # The Koala benchmark suite installation script
 # https://kben.sh
 
@@ -13,7 +14,7 @@ git clone https://github.com/kbensh/koala
 
 echo '[*] Do you want to install the Koala benchmark suite dependencies? (y/n)'
 read -r install_choice
-if [[ "$install_choice" != "y" ]]; then
+if [ "$install_choice" != "y" ]; then
   echo '[!] Installation aborted!.'
   exit 0
 fi
