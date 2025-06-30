@@ -2,7 +2,6 @@
 # The Koala benchmark suite installation script
 # https://kben.sh
 
-# Unused for now
 in_container() {
   [ -f /proc/1/cgroup ] && grep -qaE 'docker|kubepods|containerd' /proc/1/cgroup && return 0
   [ -f /.dockerenv ] && return 0
@@ -12,11 +11,14 @@ in_container() {
 echo '[*] Cloning the Koala benchmark suite repository...'
 git clone https://github.com/kbensh/koala
 
-echo '[*] Do you want to install the Koala benchmark suite dependencies? (y/n)'
-read -r install_choice
-if [ "$install_choice" != "y" ]; then
-  echo '[!] Installation aborted!.'
-  exit 0
+# Only ask if outside a container
+if ! in_container; then
+  echo '[*] You are outside a container. Are you sure you want to install the Koala benchmark suite dependencies? (y/n)'
+  read -r install_choice
+  if [ "$install_choice" != "y" ]; then
+    echo '[!] Installation aborted!.'
+    exit 0
+  fi
 fi
 
 cd koala || exit 1
