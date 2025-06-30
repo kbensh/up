@@ -11,7 +11,7 @@ in_container() {
 echo '[*] Cloning the Koala benchmark suite repository...'
 git clone https://github.com/kbensh/koala
 
-echo '[*] Do you want to install the Koala benchmark suite's dependencies? (y/n)'
+echo '[*] Do you want to install the Koala benchmark suite dependencies? (y/n)'
 read -r install_choice
 if [[ "$install_choice" != "y" ]]; then
   echo '[!] Installation aborted!.'
